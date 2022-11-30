@@ -3,12 +3,13 @@ package com.theophiluskibet.communityapi.services
 import com.theophiluskibet.communityapi.models.Community
 import com.theophiluskibet.communityapi.repositories.CommunityRepository
 import com.theophiluskibet.communityapi.utils.ResponseHandler
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service
-class CommunityService(private val communityRepository: CommunityRepository) {
+class CommunityService(@Autowired private val communityRepository: CommunityRepository) {
     fun getAllCommunities(): ResponseHandler? {
         val communities = communityRepository.findAll()
         return if (!communities.isNullOrEmpty()) {
@@ -41,7 +42,7 @@ class CommunityService(private val communityRepository: CommunityRepository) {
             )
         }
 
-    fun getCommunityById(id: Long): ResponseHandler? {
+    fun getCommunityById(id: String): ResponseHandler? {
         val community = communityRepository.findById(id)
         return if (community.isEmpty) {
             ResponseHandler(
@@ -59,7 +60,7 @@ class CommunityService(private val communityRepository: CommunityRepository) {
             )
     }
 
-    fun deleteCommunityById(id: Long) =
+    fun deleteCommunityById(id: String) =
         if (communityRepository.existsById(id)) communityRepository.deleteById(id) else throw ResponseStatusException(
             HttpStatus.NOT_FOUND
         )
