@@ -2,32 +2,61 @@ package com.theophiluskibet.communityapi.services
 
 import com.theophiluskibet.communityapi.models.Community
 import com.theophiluskibet.communityapi.repositories.CommunityRepository
-import com.theophiluskibet.communityapi.utils.SuccessResponse
-import org.springframework.data.repository.findByIdOrNull
+import com.theophiluskibet.communityapi.utils.ResponseHandler
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
-import java.net.http.HttpResponse
 
 @Service
 class CommunityService(private val communityRepository: CommunityRepository) {
+    fun getAllCommunities(): ResponseHandler? {
+        val communities = communityRepository.findAll()
+        return if (!communities.isNullOrEmpty()) {
+            ResponseHandler(
+                code = HttpStatus.OK.value(),
+                success = true,
+                message = "Communities fetched successfully",
+                data = communities
+            )
+        } else
+            ResponseHandler(code = HttpStatus.OK.value(), success = true, message = "No communities found", data = null)
 
-    fun getAllCommunities(): List<Community> = communityRepository.findAll()
+    }
 
-    fun saveCommuniy(community: Community) =
-        if (community.name.isNullOrEmpty()) SuccessResponse(
-            success = false,
-            message = "Name cannot be blank",
-            data = null
-        ) else communityRepository.save(community)
+    fun saveCommuniy(community: Community): ResponseHandler? =
+        if (community.name.isNullOrEmpty()) {
+            ResponseHandler(
+                code = HttpStatus.NOT_ACCEPTABLE.value(),
+                success = false,
+                message = "Name cannot be blank",
+                data = null
+            )
+        } else {
+            communityRepository.save(community)
+            ResponseHandler(
+                code = HttpStatus.CREATED.value(),
+                success = true,
+                message = "Community created successfully",
+                data = communityRepository.findAll().last()
+            )
+        }
 
-    fun getCommunityById(id: Long): SuccessResponse? {
+    fun getCommunityById(id: Long): ResponseHandler? {
         val community = communityRepository.findById(id)
         return if (community.isEmpty) {
-            SuccessResponse(success = false, message = "Not communities found with id: $id", data = null)
+            ResponseHandler(
+                code = HttpStatus.NOT_FOUND.value(),
+                success = false,
+                message = "Not communities found with id: $id",
+                data = null
+            )
         } else
-            SuccessResponse(success = true, message = "Community fetched successfully", data = community)
+            ResponseHandler(
+                code = HttpStatus.OK.value(),
+                success = true,
+                message = "Community fetched successfully",
+                data = community
+            )
     }
 
     fun deleteCommunityById(id: Long) =

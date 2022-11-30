@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("api/v1/communities")
 class CommunityController(private val communityService: CommunityService) {
     @GetMapping
-    fun getCommunites(): List<Community> = communityService.getAllCommunities()
+    fun getCommunities() = communityService.getAllCommunities()
 
     @GetMapping("/{id}")
     fun getCommunity(@PathVariable id: Long) = communityService.getCommunityById(id)
