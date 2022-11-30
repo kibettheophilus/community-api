@@ -8,8 +8,9 @@ import jakarta.persistence.Id
 @Entity
 data class Community(
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Int,
+    val id: Long,
     val name: String,
     val members: Int,
-    val dateStarted: Long
+    val dateStarted: Long,
+    val description: String
 )
