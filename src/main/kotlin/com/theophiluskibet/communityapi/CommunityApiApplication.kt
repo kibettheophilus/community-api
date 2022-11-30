@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class CommunityApiApplication
 
 fun main(args: Array<String>) {
-    runApplication<CommunityApiApplication>(*args)
+	runApplication<CommunityApiApplication>(*args)
 }
