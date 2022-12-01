@@ -1,8 +1,14 @@
 package com.theophiluskibet.communityapi.models
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
+import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.Field
+import org.springframework.stereotype.Component
+
+@Document(collection = "events")
 data class Event(
-    val id: Int,
-    val eventName: String,
-    val eventDate: Long,
-    val location: String
+    @Id
+    val id: String,
+    var eventName: String,
 )

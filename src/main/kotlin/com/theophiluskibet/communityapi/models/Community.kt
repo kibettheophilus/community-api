@@ -4,10 +4,11 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-@Entity
+@Document(collection = "communities")
 data class Community(
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     val id: Long,
     val name: String,
     val members: Int,

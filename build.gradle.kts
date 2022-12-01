@@ -28,6 +28,9 @@ dependencies {
 	// okhttp
 	implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
+	//mongo db
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.0.0")
+
 }
 
 tasks.withType<KotlinCompile> {
