@@ -1,0 +1,12 @@
+type Event {
+    id: ID
+    eventName: String
+}
+
+type EventQuery {
+    event: Event
+}
+
+schema {
+    query: EventQuery
+}
