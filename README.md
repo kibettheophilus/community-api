@@ -1,2 +1,2 @@
 # community-api
-Simple backend application using Kotlin Spring Boot.
+Simple backend application using Kotlin Spring Boot.  `WIP`:hammer:
