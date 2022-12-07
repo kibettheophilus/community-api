@@ -8,15 +8,17 @@ data class Community(
     val name: String,
     val description: String,
     val logoUrl: String? = null,
+    val events: List<Event>? = null,
+    val socials: Socials?,
     val createdDate: String? = null,
     val createdBy: String? = null,
     val modifiedDate: String? = null,
     val modifiedBy: String? = null
 )
-//
-//data class Socials(
-//    val twitterUrl: String? = null,
-//    val facebookUrl: String? = null,
-//    val youtubeUrl: String? = null,
-//    val linkedinUrl: String? = null
-//)
+
+data class Socials(
+    val twitterUrl: String? = null,
+    val facebookUrl: String? = null,
+    val youtubeUrl: String? = null,
+    val linkedinUrl: String? = null
+)

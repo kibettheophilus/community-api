@@ -2,8 +2,10 @@ package com.theophiluskibet.communityapi.controllers
 
 import com.theophiluskibet.communityapi.models.Community
 import com.theophiluskibet.communityapi.services.CommunityService
+import com.theophiluskibet.communityapi.utils.ResponseHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -18,6 +20,16 @@ import org.springframework.web.bind.annotation.RestController
 class CommunityController(@Autowired private val communityService: CommunityService) {
     @GetMapping
     fun getCommunities() = communityService.getAllCommunities()
+
+    @GetMapping("/here")
+    fun getAllCommunities() = ResponseEntity.ok(
+        ResponseHandler(
+            code = HttpStatus.OK.value(),
+            success = true,
+            message = "Testing format",
+            data = communityService.getCommunities()
+        )
+    )
 
     @GetMapping("/{id}")
     fun getCommunity(@PathVariable id: String) = communityService.getCommunityById(id)

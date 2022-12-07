@@ -1,6 +1,8 @@
 package com.theophiluskibet.communityapi.services
 
 import com.theophiluskibet.communityapi.models.Community
+import com.theophiluskibet.communityapi.models.Event
+import com.theophiluskibet.communityapi.models.Socials
 import com.theophiluskibet.communityapi.repositories.CommunityRepository
 import com.theophiluskibet.communityapi.utils.ResponseHandler
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,6 +28,10 @@ class CommunityService(@Autowired private val communityRepository: CommunityRepo
 
     }
 
+    fun getCommunities(): List<Community> {
+        return communityRepository.findAll()
+    }
+
     fun saveCommuniy(community: Community): ResponseHandler? =
         if (community.name.isNullOrEmpty()) {
             ResponseHandler(
@@ -39,7 +45,9 @@ class CommunityService(@Autowired private val communityRepository: CommunityRepo
                 createdDate = LocalDateTime.now().toString(),
                 createdBy = "Theophilus",
                 modifiedDate = LocalDateTime.now().toString(),
-                modifiedBy = "Theophilus"
+                modifiedBy = "Theophilus",
+                events = listOf(Event("This is a test event"), Event("This is another event")),
+                socials = Socials(twitterUrl = "twitter.com")
             )
             communityRepository.save(saveCom)
             ResponseHandler(
