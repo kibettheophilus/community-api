@@ -6,8 +6,3 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class Event(
     val eventName: String,
 )
-
-data class EventDto(
-    val id: String,
-    val eventName: String
-)

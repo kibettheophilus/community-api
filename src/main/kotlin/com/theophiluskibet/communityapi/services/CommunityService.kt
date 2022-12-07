@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
+import java.sql.Time
+import java.time.LocalDateTime
 
 @Service
 class CommunityService(@Autowired private val communityRepository: CommunityRepository) {
@@ -33,7 +35,13 @@ class CommunityService(@Autowired private val communityRepository: CommunityRepo
                 data = null
             )
         } else {
-            communityRepository.save(community)
+            val saveCom = community.copy(
+                createdDate = LocalDateTime.now().toString(),
+                createdBy = "Theophilus",
+                modifiedDate = LocalDateTime.now().toString(),
+                modifiedBy = "Theophilus"
+            )
+            communityRepository.save(saveCom)
             ResponseHandler(
                 code = HttpStatus.CREATED.value(),
                 success = true,
