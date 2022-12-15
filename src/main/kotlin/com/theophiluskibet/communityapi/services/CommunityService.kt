@@ -45,9 +45,7 @@ class CommunityService(@Autowired private val communityRepository: CommunityRepo
                 createdDate = LocalDateTime.now().toString(),
                 createdBy = "Theophilus",
                 modifiedDate = LocalDateTime.now().toString(),
-                modifiedBy = "Theophilus",
-                events = listOf(Event("This is a test event"), Event("This is another event")),
-                socials = Socials(twitterUrl = "twitter.com")
+                modifiedBy = "Theophilus"
             )
             communityRepository.save(saveCom)
             ResponseHandler(

@@ -7,18 +7,18 @@ data class Community(
     val id: String? = null,
     val name: String,
     val description: String,
-    val logoUrl: String? = null,
-    val events: List<Event>? = null,
-    val socials: Socials?,
-    val createdDate: String? = null,
+    val logoUrl: String? = "",
+    val events: List<Event>? = listOf(),
+    val socials: Socials? = Socials(),
+    val createdDate: String? = "",
     val createdBy: String? = null,
     val modifiedDate: String? = null,
     val modifiedBy: String? = null
 )
 
 data class Socials(
-    val twitterUrl: String? = null,
-    val facebookUrl: String? = null,
-    val youtubeUrl: String? = null,
-    val linkedinUrl: String? = null
+    val twitterUrl: String? = "",
+    val facebookUrl: String? = "",
+    val youtubeUrl: String? = "",
+    val linkedinUrl: String? = ""
 )
